@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap-icons/font/bootstrap-icons.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -7,13 +8,14 @@ import logo from '../assets/lotus logo.png';
 import logo1 from '../assets/lotus logo1.png';
 
 export default function UserNavbar() {
+  const navigate = useNavigate();
   const [navBackground, setNavBackground] = useState('transparent');
   const [navFont, setNavFont] = useState('white');
   const [logoHead, setLogoHead] = useState(logo);
   const [logoStyle, setLogoStyle] = useState("home-logo");
   const [isOpen, setIsOpen] = useState(false);
-  const [selectStyle, setSelectStyle] = useState("selectbox")
-  const [reserveStyle,setReserveStyle] = useState("reserve-btn")
+  const [selectStyle, setSelectStyle] = useState("selectbox");
+  const [reserveStyle,setReserveStyle] = useState("reserve-btn");
 
   const handleScroll = () => {
     if (window.scrollY > 50) {
@@ -47,9 +49,9 @@ export default function UserNavbar() {
   return (
     <>
       <div className='navbar fixed-top' style={{ backgroundColor: navBackground, color: navFont }}>
-        <span onClick={toggleDrawer}>
-          <i className="bi bi-list fs-2 px-4 py-2"></i>
-          <i className="bi bi-search fs-4 px-4 py-2"></i>
+        <span >
+          <i className="bi bi-list fs-2 px-4 py-2" onClick={toggleDrawer}></i>
+          <i className="bi bi-search fs-4 px-4 py-2" ></i>
         </span>
         <img src={logoHead} className={logoStyle} />
         <ul className='nav-items'>
@@ -61,7 +63,7 @@ export default function UserNavbar() {
           </li>
           <li><i className="bi bi-person px-1"></i>Login</li>
           <li>My Reservation</li>
-          <li><button className={reserveStyle}>RESERVE</button></li>
+          <li><button className={reserveStyle} onClick={()=>navigate('/reservation')}>RESERVE</button></li>
         </ul>
       </div>
       <div className={`side-drawer ${isOpen ? 'open' : ''}`}>

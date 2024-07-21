@@ -151,104 +151,188 @@
 
 
 
-.home {
-  height: 100vh;
-}
-
-.home-canvas {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-}
-
-.home-para {
-  text-align: center;
-  margin-top: 20vh;
-}
-
-.home-para h1 {
-  font-size: 3em;
-  margin-bottom: 0.5em;
-  font-family: berkshire swash,cursive;
-}
-
-.home-para p {
-  font-size: 1.5em;
-}
-
-.home-para1 {
-   
-    margin-top: 10vh;
-    
+  .home {
+    height: 100vh;
   }
-.home-para1 h2{
+  
+  .home-canvas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+  }
+  
+  .home-para {
+    text-align: center;
+    margin-top: 20vh;
+  }
+  
+  .home-para h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+    font-family: 'Berkshire Swash', cursive;
+  }
+  
+  .home-para p {
+    font-size: 1.5em;
+  }
+  
+  .home-para1 {
+    margin-top: 10vh;
+  }
+  
+  .home-para1 h2 {
     font-family: "Bressay Display", "Old Standard TT", serif;
     padding-bottom: 2%;
     text-align: center;
-}
-.home-para1 p {
-    font-size:0.9em;
+  }
+  
+  .home-para1 p {
+    font-size: 0.9em;
     width: 60%;
     text-align: center;
     margin-left: 20%;
   }
-
-.home-gallery{
-    margin-top: -10%;
-}
-
-.home-gallery .gallery-left{
-    height: 45vh;
-    width: 30%;
-    margin-left: 0;
+  
+  .home-gallery {
+    margin-top: -14%;
     
-}
-
-.home-gallery .gallery-middle{
+  }
+  
+  .home-gallery .gallery-item {
     position: relative;
-    height: 100vh;
-    width: 40%;
-    top: 27vh;
-    
-}
-
-.home-gallery .gallery-right{
-   
-    height: 45vh;
+    overflow: hidden;
+    display: inline-block;
     width: 30%;
-    
-
-}
-
-.home-gallery .row1{
-    display: inline-block;
-    padding: 0px 1%;
-}
-.home-gallery .row2{
-    display: inline-block;
-    padding: 0px 1%;
-    margin-top: -18vh;
-}
-
-.home-gallery .gallery-right:last-child{
-    margin-left: 40%;
-}
-
-.home .home-gallery-btn{
+    height: 45vh;
+    margin: 0 1%;
+  }
+  
+  .home-gallery .gallery-item.middle {
+    width: 34%;
+    height: 91vh;
+    top: 46vh;
+  }
+  
+  .home-gallery img {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .home-gallery img:hover {
+    transform: scale(1.1);
+  }
+  
+  
+  
+  
+  
+  .home .home-gallery-btn {
     border: 1px solid black;
     margin-top: 5vh;
     margin-left: 42%;
     text-transform: uppercase;
     padding: 5px 5%;
     margin-bottom: 10%;
-}
-
-.home .home-gallery-btn:hover{
+  }
+  
+  .home .home-gallery-btn:hover {
     border: 1px solid rgb(255, 255, 255);
     transition: 0.5s;
     background-color: wheat;
-}
+  }
+  
+
+  .reservation-header{
+    width: 100%;
+    height: 100vh;
+  }
+
+  .reservation-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .reservation-form label {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .reservation-form input,
+  .reservation-form .react-datepicker-wrapper {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .reservation-form .react-datepicker-wrapper input {
+    width: 100%;
+  }
+
+  .reservation-search-btn{
+    padding: 8px 5px;
+    border: 1px solid white;
+    border-radius: 5px;
+  }
+
+  .reservation-search-btn:hover{
+    background-color: rgba(245, 222, 179, 0.603);
+    transition: 0.5s;
+  }
+
+  .reservation-scroll{
+    visibility: visible;
+    width: 35%;
+    position: absolute;
+    top: 35vh;
+    right: 3%;
+  }
+
+  .reservation-scroll-hidden{
+    visibility: hidden;
+  }
+
+  .reservation-para{
+      
+      margin-top: -75vh;
+    
+  }
+
+  .reservation-room{
+    border: 1px solid black;
+    align-content: flex-start;
+    text-align: left;
+    width: 80%;
+    height: 35vh;
+  }
+  .reservation-room img{
+    
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+  }
+  .reservation-room img:hover{
+    transform: scale(1.1);
+  }
+  .reservation-room .reservation-room-para{
+    display: inline-block;
+    padding-left: 5%;
+    position: relative;
+    top: -10vh;
+  }
+  .reservation-room-item{
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    width: 30%;
+    height: 35vh;
+    margin: 0 1%;
+  }
