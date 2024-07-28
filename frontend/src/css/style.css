@@ -247,11 +247,11 @@
   }
   
 
-  .reservation-header{
+  .reservation-header {
     width: 100%;
     height: 100vh;
   }
-
+  
   .reservation-form {
     display: flex;
     flex-direction: column;
@@ -275,64 +275,163 @@
   .reservation-form .react-datepicker-wrapper input {
     width: 100%;
   }
-
-  .reservation-search-btn{
+  
+  .reservation-search-btn {
     padding: 8px 5px;
     border: 1px solid white;
     border-radius: 5px;
   }
-
-  .reservation-search-btn:hover{
+  
+  .reservation-search-btn:hover {
     background-color: rgba(245, 222, 179, 0.603);
     transition: 0.5s;
   }
-
-  .reservation-scroll{
-    visibility: visible;
+  
+  .reservation-scroll {
     width: 35%;
     position: absolute;
     top: 35vh;
-    right: 3%;
+    right: 1%;
   }
-
-  .reservation-scroll-hidden{
+  
+  .reservation-scroll-hidden {
     visibility: hidden;
   }
-
-  .reservation-para{
-      
-      margin-top: -75vh;
-    
+  
+  .reservation-para {
+    margin-top: 5vh;
+    width: 100%;
+    height: 20vh;
   }
-
-  .reservation-room{
-    border: 1px solid black;
-    align-content: flex-start;
-    text-align: left;
+  
+  .reservation-room-component {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .reservation-room-item {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
     width: 80%;
-    height: 35vh;
+    height: 50vh;
+    margin: 0 0%;
   }
-  .reservation-room img{
-    
+  
+  .reservation-room-item img {
     display: inline-block;
     width: 100%;
     height: 100%;
     transition: transform 0.5s ease-in-out;
   }
-  .reservation-room img:hover{
+  
+  .reservation-room-item img:hover {
     transform: scale(1.1);
   }
-  .reservation-room .reservation-room-para{
-    display: inline-block;
+  
+  .reservation-room-para {
+    width: 78%;
     padding-left: 5%;
+    margin-left: 2%;
+    margin-top: -3%;
     position: relative;
-    top: -10vh;
+    background-color: white;
+    box-shadow: 2px 2px 15px 2px rgba(0, 0, 0, 0.137);
   }
-  .reservation-room-item{
-    position: relative;
-    overflow: hidden;
+  
+  .reservation-room-para .dimention-btn {
+    padding: 5px 8%;
+    border: none;
+    background-color: black;
+    color: white;
     display: inline-block;
-    width: 30%;
-    height: 35vh;
-    margin: 0 1%;
   }
+  
+  .reservation-room-para .dimention-btn:hover {
+    background-color: #282c34;
+    transition: 0.5s;
+  }
+  
+  /* Add this CSS to style the arrows */
+.slick-prev, .slick-next {
+  
+  margin-top: -4%;
+  z-index: 1;
+}
+
+.slick-prev {
+  margin-left: 2%;
+}
+
+.slick-next {
+  left: 92%;
+}
+
+.slick-prev::before, .slick-next::before {
+  vertical-align: middle;
+  
+  
+}
+/*
+.slick-prev::before {
+  content: '\f057'; 
+}
+
+.slick-next::before {
+  content: '\f055'; 
+}*/
+
+.customarrow-back{
+  background-color: black;
+  
+  vertical-align: middle;
+}
+
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  width: 100%;
+  position: fixed;
+  top: 25vh;
+  left: 0;
+  background-color: rgb(255, 255, 255); 
+  z-index: 1000; 
+}
+
+.loading-spinner img {
+  width: 50px; 
+  margin-bottom: 20px; 
+}
+
+
+.about-header{
+  position: absolute;
+  top: 35vh;
+  color: rgb(3, 3, 3);
+  left: 35%;
+  letter-spacing: 20px;
+  overflow: hidden;
+  border-right: .15em solid orange; 
+  white-space: nowrap;
+  margin: 0 auto;
+  animation: typing 1.5s steps(40,end), blink-caret .55s step-end infinite;
+  width: 30%;
+  font-family: "Edu AU VIC WA NT Hand", cursive;
+
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 30% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange;  }
+}
