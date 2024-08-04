@@ -1,4 +1,3 @@
-// src/App.js
 import React from 'react';
 import Image360Viewer from './Image360Viewer';
 import '../css/style.css';
