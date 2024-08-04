@@ -8,7 +8,8 @@ const app=express();
 //import routes
 
 const userRoutes=require('./routes/user');
-const roomdetailsRoutes=require('./routes/roomdetails')
+const roomdetailsRoutes=require('./routes/roomdetails');
+const bookingRoutes=require('./routes/booking');
 /*
 const reviewRoutes=require('./routes/review');
 const applyRoutes=require('./routes/eventapplication');
@@ -25,6 +26,7 @@ app.use(cors()); //this is using for avoiding the security reason block.reason i
 
 app.use(userRoutes);
 app.use(roomdetailsRoutes);
+app.use(bookingRoutes);
 /*
 app.use(reviewRoutes);
 app.use(applyRoutes);
