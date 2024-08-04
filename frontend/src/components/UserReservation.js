@@ -13,11 +13,9 @@ import '../css/style.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap-icons/font/bootstrap-icons.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import image1 from '../assets/HotelLobby.jpg';
 import CustomArrow from './CustomArrow';
 import leftArrow from '../assets/left-arrow2.png';
 import rightArrow from '../assets/right-arrow2.png';
-import lotusAnimation from '../assets/lotus.json'; // Import the Lottie animation
 
 export default function UserReservation() {
   const [checkinDate, setCheckinDate] = useState(null);
@@ -26,23 +24,24 @@ export default function UserReservation() {
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
   const [rooms, setRooms] = useState([]);
-  const [loading, setLoading] = useState(true); // State for loading status
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setLoading(false); // Set loading to false after 5 seconds
+      setLoading(false); 
     }, 3000);
 
     fetchData();
 
-    return () => clearTimeout(timer); // Clear the timeout if the component unmounts
+    return () => clearTimeout(timer); 
   }, []);
 
   const fetchData = async () => {
     try {
       const response = await axios.get('http://localhost:8000/roomdetails');
       console.log('API Response:', response.data);
-      setRooms(response.data.existingPosts || []);
+      const sortedRooms = response.data.existingPosts.sort((a, b) => a.roomno - b.roomno);
+      setRooms(sortedRooms || []);
     } catch (error) {
       console.error('Error fetching room details:', error.message);
     } 
@@ -73,7 +72,7 @@ export default function UserReservation() {
     prevArrow: <CustomArrow className="slick-prev" arrow={leftArrow} isNext={false} />,
     nextArrow: <CustomArrow className="slick-next" arrow={rightArrow} isNext={true} />,
     beforeChange: (current, next) => {
-      // Trigger re-render to update arrow visibility
+      
       setTimeout(() => setCheckinDate(checkinDate), 0);
     },
   };
@@ -82,7 +81,7 @@ export default function UserReservation() {
     <div>
       <UserNavbar />
       {loading ? (
-        // Render loading GIF and Lottie animation while loading is true
+        
         <div className="loading-spinner">
           <DotLottieReact
             src="https://lottie.host/0e906da7-5c99-4ed6-9f7a-6c59cd26b7c0/w2HLxVPLQ4.json"
@@ -93,7 +92,7 @@ export default function UserReservation() {
           <h1 className='about-header'>LotusWave</h1>
         </div>
       ) : (
-        // Render the main content when loading is false
+        
         <>
           <Parallax bgImage={backReseravtion} strength={500}>
             <div className='home-canvas'>
@@ -151,10 +150,11 @@ export default function UserReservation() {
                 rooms.map((room, index) => (
                   <div key={index} className='reservation-room-component'>
                     <div className='reservation-room-item'>
-                      <img src={image1} alt={room.name} />
+                      <img src={`http://localhost:8000${room.roomimage}`}  alt={room.name} />
                     </div>
                     <div className='reservation-room-para'>
                       <h3>{room.roomname}</h3>
+                      <h6>Room No {room.roomno}</h6>
                       <p>{room.roomdetails}</p>
                       <button className='dimention-btn'>View</button>
                       <button className='dimention-btn' style={{ marginLeft: '2%' }}>3D Model</button>

@@ -1,4 +1,3 @@
-// src/components/Image360Viewer.js
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
@@ -11,7 +10,7 @@ const ImageSphere = ({ imageSrc }) => {
 
   return (
     <mesh>
-      <sphereGeometry args={[50, 60, 40]} /> {/* Increase the first argument for decreased curvature */}
+      <sphereGeometry args={[50, 60, 40]} /> 
       <meshBasicMaterial map={texture} side={THREE.DoubleSide} />
     </mesh>
   );
