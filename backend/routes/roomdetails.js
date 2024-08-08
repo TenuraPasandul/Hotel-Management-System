@@ -16,18 +16,25 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+
 // Save post 
-router.post('/roomdetails/save', upload.single('roomImage'), async (req, res) => {
+router.post('/roomdetails/save', upload.fields([{ name: 'roomImage', maxCount: 1 }, { name: 'room3dview', maxCount: 1 }]), async (req, res) => {
   try {
-    const { roomno, roomname, roomdetails, roomprice } = req.body;
-    const roomImage = req.file ? `/uploads/${req.file.filename}` : null;
+    const { roomno, roomname, roomdetails, roomprice, size, adults, child, roomservices } = req.body;
+    const roomImage = req.files['roomImage'] ? `/uploads/${req.files['roomImage'][0].filename}` : null;
+    const room3dview = req.files['room3dview'] ? `/uploads/${req.files['room3dview'][0].filename}` : null;
 
     const newPost = new Posts({
       roomno,
       roomname,
       roomdetails,
       roomprice,
+      size,
+      adults,
+      child,
+      roomservices,
       roomimage: roomImage,
+      room3dview: room3dview,
     });
 
     await newPost.save();
@@ -41,6 +48,71 @@ router.post('/roomdetails/save', upload.single('roomImage'), async (req, res) =>
   }
 });
 
+// Update post
+router.put('/roomdetails/update/:id', upload.fields([{ name: 'roomImage', maxCount: 1 }, { name: 'room3dview', maxCount: 1 }]), async (req, res) => {
+  try {
+    const updatedData = { ...req.body };
+    if (req.files['roomImage']) {
+      updatedData.roomimage = `/uploads/${req.files['roomImage'][0].filename}`;
+    }
+    if (req.files['room3dview']) {
+      updatedData.room3dview = `/uploads/${req.files['room3dview'][0].filename}`;
+    }
+
+    const updatedPost = await Posts.findByIdAndUpdate(
+      req.params.id,
+      { $set: updatedData },
+      { new: true }
+    );
+
+    if (!updatedPost) {
+      return res.status(404).json({
+        error: "Post not found"
+      });
+    }
+
+    return res.status(200).json({
+      success: "Post updated successfully",
+      data: updatedPost
+    });
+  } catch (err) {
+    return res.status(500).json({
+      error: "Internal server error",
+      message: err.message
+    });
+  }
+});
+
+/*
+// Save post 
+router.post('/roomdetails/save', upload.single('roomImage'), async (req, res) => {
+  try {
+    const { roomno, roomname, roomdetails, roomprice,size,adults,child,roomservices } = req.body;
+    const roomImage = req.file ? `/uploads/${req.file.filename}` : null;
+
+    const newPost = new Posts({
+      roomno,
+      roomname,
+      roomdetails,
+      roomprice,
+      size,
+      adults,
+      child,
+      roomservices,
+      roomimage: roomImage,
+    });
+
+    await newPost.save();
+    return res.status(200).json({
+      success: "Post saved successfully"
+    });
+  } catch (err) {
+    return res.status(400).json({
+      error: err.message
+    });
+  }
+});
+*/
 // Get posts
 router.get('/roomdetails', async (req, res) => {
   try {
@@ -56,6 +128,7 @@ router.get('/roomdetails', async (req, res) => {
   }
 });
 
+/*
 // Update post
 router.put('/roomdetails/update/:id', upload.single('roomImage'), async (req, res) => {
   try {
@@ -87,7 +160,7 @@ router.put('/roomdetails/update/:id', upload.single('roomImage'), async (req, re
     });
   }
 });
-
+*/
 // Delete post
 router.delete('/roomdetails/delete/:id', async (req, res) => {
   try {
