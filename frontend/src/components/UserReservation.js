@@ -16,6 +16,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import CustomArrow from './CustomArrow';
 import leftArrow from '../assets/left-arrow2.png';
 import rightArrow from '../assets/right-arrow2.png';
+import RoomModal from './RoomModal';
+import Render3D from './Render3D';
 
 export default function UserReservation() {
   const [checkinDate, setCheckinDate] = useState(null);
@@ -25,6 +27,9 @@ export default function UserReservation() {
   const [children, setChildren] = useState(0);
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(true); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isOpenView, setIsOpenView] = useState(false);
+  const [selectedRoom, setSelectedRoom] = useState(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -62,6 +67,27 @@ export default function UserReservation() {
     setScrollAnimation("reservation-scroll");
   };
 
+  const openModal = (room) => {
+    setSelectedRoom(room);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedRoom(null);
+  };
+
+  const openView = (room) =>{
+    setSelectedRoom(room);
+    setIsOpenView(true);
+  }
+
+  const closeView = () => {
+    setIsOpenView(false);
+    setSelectedRoom(null);
+  };
+
+
   const sliderSettings = {
     dots: true,
     infinite: false,
@@ -72,7 +98,6 @@ export default function UserReservation() {
     prevArrow: <CustomArrow className="slick-prev" arrow={leftArrow} isNext={false} />,
     nextArrow: <CustomArrow className="slick-next" arrow={rightArrow} isNext={true} />,
     beforeChange: (current, next) => {
-      
       setTimeout(() => setCheckinDate(checkinDate), 0);
     },
   };
@@ -81,7 +106,6 @@ export default function UserReservation() {
     <div>
       <UserNavbar />
       {loading ? (
-        
         <div className="loading-spinner">
           <DotLottieReact
             src="https://lottie.host/0e906da7-5c99-4ed6-9f7a-6c59cd26b7c0/w2HLxVPLQ4.json"
@@ -92,7 +116,6 @@ export default function UserReservation() {
           <h1 className='about-header'>LotusWave</h1>
         </div>
       ) : (
-        
         <>
           <Parallax bgImage={backReseravtion} strength={500}>
             <div className='home-canvas'>
@@ -156,8 +179,8 @@ export default function UserReservation() {
                       <h3>{room.roomname}</h3>
                       <h6>Room No {room.roomno}</h6>
                       <p>{room.roomdetails}</p>
-                      <button className='dimention-btn'>View</button>
-                      <button className='dimention-btn' style={{ marginLeft: '2%' }}>3D Model</button>
+                      <button className='dimention-btn' onClick={() => openModal(room)}>View</button>
+                      <button className='dimention-btn' style={{ marginLeft: '2%' }} onClick={()=>openView(room)}>3D Model</button>
                       <p>LKR.{room.roomprice}</p>
                     </div>
                   </div>
@@ -174,6 +197,23 @@ export default function UserReservation() {
             loop
             autoplay
           />
+
+          {selectedRoom && (
+            <RoomModal
+              isOpen={isModalOpen}
+              onRequestClose={closeModal}
+              room={selectedRoom}
+            />
+            
+          )}
+
+          {selectedRoom && (  
+            <Render3D
+            isOpen={isOpenView}
+            onRequestClose={closeView}
+            room={selectedRoom}
+            />
+          )}
         </>
       )}
     </div>
